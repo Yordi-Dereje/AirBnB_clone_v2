@@ -2,14 +2,14 @@
 """
 starts a Flask web application
 """
-from models import storage
+from models import *
 from flask import Flask
 from flask import render_template
 
 app = Flask(__name__)
 
 
-@app.route("/cities_by_states", strict_slashes=False)
+@app.route("/states", strict_slashes=False)
 def citystates():
     ''' Display page with list of all states and related cities '''
     states = storage.all("State")
@@ -26,7 +26,7 @@ def states_id(id):
 
 
 @app.teardown_appcontext
-def teardown(exc):
+def teardown(err):
     ''' reset the session of db storage '''
     storage.close()
 
